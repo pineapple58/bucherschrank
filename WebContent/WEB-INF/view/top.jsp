@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
+<%@page import="java.io.*, java.util.*" %>
 <%@ page import="model.Book"%>
+
 <%
 List<Book> bookList = (List<Book>)request.getAttribute("bookList");
 List<Book> rentalBookList = (List<Book>)request.getAttribute("rentalBookList");
@@ -16,14 +18,11 @@ List<Book> rentalBookList = (List<Book>)request.getAttribute("rentalBookList");
 <title>Topページ</title>
 </head>
 <body>
+
 	<div class="head">
-		<ul>
-			<li><a href="#">(ユーザー追加)</a></li>
-			<li><a href="#">(書籍追加)</a></li>
-			<li><a href="#">(管理者系機能)</a></li>
-			<li><a href="#">ログイン</a></li>
-			<li>※ヘッダー項目：権限によって表示を変える想定</li>
-		</ul>
+<jsp:include page="/WEB-INF/view/header.jsp" flush="true" />
+
+
 		<ul>
 			<li>
 				表示は書籍名から画像に変更するか。。。お勧め本の設定とか、読んだ本のレビュー機能とか
@@ -39,7 +38,7 @@ List<Book> rentalBookList = (List<Book>)request.getAttribute("rentalBookList");
 			</tr>
 			<% for(Book book : rentalBookList) { %>
 			<tr>
-				<td><%= book.getName() %></td>
+				<td><%= book.getTitle() %></td>
 				<td><input type="submit" class="warning" value="返す"></td>
 			</tr>
 			<% } %>
@@ -52,7 +51,7 @@ List<Book> rentalBookList = (List<Book>)request.getAttribute("rentalBookList");
 			</tr>
 			<% for(Book book : bookList) { %>
 			<tr>
-				<td><%= book.getName() %></td>
+				<td><%= book.getTitle() %></td>
 				<td><input type="submit" class="success" value="借りる"></td>
 			</tr>
 			<% } %>
